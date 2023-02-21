@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>后台管理-登陆</title>
+    <#include "common.ftl">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -99,7 +100,7 @@
                 return false;
             }
             layer.msg('登录成功', function () {
-                window.location = '/index.html';
+                window.location =${ctx}"/main";
             });
             return false;
         });

@@ -9,14 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class pageController extends BaseController {
 
     /**
-     * 404页面
+     * 菜单管理
      * @return
      */
-    @RequestMapping("404")
-    public String s0s(){
-        return "page/404";
+    @RequestMapping("menu")
+    public String menu(){
+        return "page/menu";
     }
 
+    /**
+     * 系统设置
+     * @return
+     */
+    @RequestMapping("setting")
+    public String setting(){
+        return "page/setting";
+    }
+
+    /**
+     * 表格示例
+     * @return
+     */
+    @RequestMapping("form")
+    public String form(){
+        return "page/form";
+    }
 
     /**
      * 图标展示
@@ -35,32 +52,14 @@ public class pageController extends BaseController {
     public String table(){
         return "page/table";
     }
-
     /**
-     * 系统设置
+     * 404页面
      * @return
      */
-    @RequestMapping("setting")
-    public String setting(){
-        return "page/setting";
-    }
 
-    /**
-     * 表单示例
-     * @return
-     */
-    @RequestMapping("form")
-    public String form(){
-        return "page/form";
-    }
-
-    /**
-     * 菜单管理
-     * @return
-     */
-    @RequestMapping("menu")
-    public String menu(){
-        return "page/menu";
+    @RequestMapping("404")
+    public String s0s(){
+        return "page/404";
     }
 
     /**
