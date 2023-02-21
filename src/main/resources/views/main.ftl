@@ -10,7 +10,7 @@
     <div class="layui-header header">
         <div class="layui-logo">
             <a href="">
-                <img src="images/logo.png" alt="logo">
+                <img src="images/xiang.jpg" alt="xiang">
                 <h1>CISPC-综合服务</h1>
             </a>
         </div>
@@ -153,7 +153,7 @@
                 <#if permissions?seq_contains(60)>-->
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-gears"></i><span
-                                class="layui-left-nav"> 系统设置</span> <span class="layui-nav-more"></span></a>
+                                class="layui-left-nav">评价反馈</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
                         <#--<#if permissions?seq_contains(6040)>-->
                         <dd>
