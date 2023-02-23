@@ -38,5 +38,5 @@ logging:
   level:
     com:
       xxxx:
-        crm:
+        cispc:
           dao: debug

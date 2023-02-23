@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>CRM-智能办公系统</title>
+    <title>cispc综合服务平台</title>
     <#include "common.ftl">
 </head>
 <body class="layui-layout-body layuimini-all">

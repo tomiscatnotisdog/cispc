@@ -245,14 +245,15 @@
                                                 <cite>系统设置</cite>
                                             </a>
                                         </div>
-                                        <#--表单示例-->
+                                        <#--表格示例-->
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
                                             <a href="${ctx}/table"  data-title="表格示例"
-                                               data-icon="fa fa-file-text">
-                                                <i class="fa fa-file-text"></i>
+                                               data-icon="fa fa-calendar">
+                                                <i class="fa fa-calendar"></i>
                                                 <cite>表格示例</cite>
                                             </a>
                                         </div>
+
                                         <#--图标列表-->
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
                                             <a href="${ctx}/icon"  data-title="图标列表"
@@ -261,10 +262,12 @@
                                                 <cite>图标列表</cite>
                                             </a>
                                         </div>
+
+                                        <#--表单示例-->
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
                                             <a href="${ctx}/form"  data-title="表单示例"
-                                               data-icon="fa fa-calendar">
-                                                <i class="fa fa-calendar"></i>
+                                               data-icon="fa fa-file-text">
+                                                <i class="fa fa-file-text"></i>
                                                 <cite>表单示例</cite>
                                             </a>
                                         </div>
@@ -284,6 +287,7 @@
                                                 <cite>按钮示例</cite>
                                             </a>
                                         </div>
+                                        <#--弹出层-->
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
                                             <a href="${ctx}/layer" data-title="弹出层"
                                                data-icon="fa fa-shield">
