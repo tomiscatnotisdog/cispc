@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.cispc.dao.IdentityMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.Identity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name_identity" property="nameIdentity" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name_identity, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_identity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from st_identity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.cispc.vo.Identity" >
+    insert into st_identity (id, name_identity, create_date, 
+      update_date)
+    values (#{id,jdbcType=INTEGER}, #{nameIdentity,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.Identity" >
+    insert into st_identity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nameIdentity != null" >
+        name_identity,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nameIdentity != null" >
+        #{nameIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.Identity" >
+    update st_identity
+    <set >
+      <if test="nameIdentity != null" >
+        name_identity = #{nameIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.Identity" >
+    update st_identity
+    set name_identity = #{nameIdentity,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--查询所有身份-->
+  <select id="selectByParams" parameterType="com.xxxx.cispc.query.IdentityQuery" resultType="com.xxxx.cispc.vo.Identity">
+    select
+    <include refid="Base_Column_List"></include>
+    from
+    st_identity
+  </select>
+
+  <select id="queryIdentityByName" resultType="com.xxxx.cispc.vo.Identity" parameterType="java.lang.String">
+    select <include refid="Base_Column_List"></include>
+    from st_identity where name_identity=#{nameIdentity}
+  </select>
+
+</mapper>

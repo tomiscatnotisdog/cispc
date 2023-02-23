@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.cispc.dao.TableMapper">
+    <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.Table">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="identity" property="identity" jdbcType="VARCHAR"/>
+        <result column="sign" property="sign" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="experience" property="experience" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="VARCHAR"/>
+        <result column="wealth" property="wealth" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_name, sex, city, phone, email, identity, sign, create_date, update_date, 
+    experience, score, wealth
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from st_table
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from st_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.xxxx.cispc.vo.Table">
+    insert into st_table (id, user_name, sex, 
+      city, phone, email, 
+      identity, sign, create_date, 
+      update_date, experience, score, 
+      wealth)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{experience,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, 
+      #{wealth,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.Table">
+        insert into st_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="identity != null">
+                identity,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="experience != null">
+                experience,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="wealth != null">
+                wealth,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                #{identity,jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="experience != null">
+                #{experience,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="wealth != null">
+                #{wealth,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.Table">
+        update st_table
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                identity = #{identity,jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null">
+                sign = #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="experience != null">
+                experience = #{experience,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=VARCHAR},
+            </if>
+            <if test="wealth != null">
+                wealth = #{wealth,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.Table">
+    update st_table
+    set user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      experience = #{experience,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      wealth = #{wealth,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!--多条件查询数据列表-->
+    <select id="selectByParams" parameterType="com.xxxx.cispc.query.TableQuery" resultType="com.xxxx.cispc.vo.Table">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        st_table
+        <where>
+            <if test="userName!=null and userName!=''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex=#{sex}
+            </if>
+            <if test="identity!=null and identity!=''">
+                and identity=#{identity}
+            </if>
+        </where>
+    </select>
+
+    <!--通过用户名称查询用户数据-->
+    <select id="queryTableByName" parameterType="java.lang.String" resultType="com.xxxx.cispc.vo.Table">
+        select
+        <include refid="Base_Column_List"></include>
+        from
+        st_table
+        where
+        user_name=#{userName}
+    </select>
+
+    <!--添加用户记录-->
+    <insert id="addTable" parameterType="com.xxxx.cispc.vo.Table">
+    insert into
+        st_table
+            (user_name, sex, city, phone, email, identity, sign, create_date, update_date, experience, score, wealth)
+        values
+            (#{userName},#{sex},#{city},#{phone},#{email},#{identity},
+            #{sign},#{createDate},#{updateDate},#{experience},#{score},#{wealth})
+  </insert>
+
+    <!--根据id集合删除数据-->
+    <delete id="deleteBatch" parameterType="java.lang.Integer">
+        delete from st_table where id in
+        <foreach collection="array" item="tableId" separator="," open="(" close=")">
+            #{tableId}
+        </foreach>
+    </delete>
+</mapper>
