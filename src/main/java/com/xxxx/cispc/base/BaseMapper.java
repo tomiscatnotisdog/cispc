@@ -1,6 +1,7 @@
 package com.xxxx.cispc.base;
 
 
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * BaseMapper  基本方法定义
  */
+@Mapper
 public interface BaseMapper<T,ID> {
     /**
      * 添加记录返回行数
@@ -47,7 +49,9 @@ public interface BaseMapper<T,ID> {
      */
     public List<T> selectByParams(BaseQuery baseQuery) throws DataAccessException;
 
+    public List<T> selectByParamsmycreate(BaseQuery baseQuery) throws DataAccessException;
 
+    public List<T> selectByParamsmyjoin(BaseQuery baseQuery) throws DataAccessException;
     /**
      * 更新单条记录
      * @param entity
@@ -76,6 +80,16 @@ public interface BaseMapper<T,ID> {
      * @return
      */
     public Integer deleteBatch(ID[] ids) throws DataAccessException;
+
+
+    /**
+     * 查询我的
+     * @param baseQuery
+     * @return
+     * @throws DataAccessException
+     */
+    List<T> queryMyGame(BaseQuery baseQuery) throws DataAccessException;
+
 
 
 }

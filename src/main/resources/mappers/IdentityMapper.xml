@@ -4,11 +4,13 @@
   <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.Identity" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name_identity" property="nameIdentity" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name_identity, create_date, update_date
+    id, name_identity, remarks, create_date, update_date, is_valid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -21,10 +23,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.xxxx.cispc.vo.Identity" >
-    insert into st_identity (id, name_identity, create_date, 
-      update_date)
-    values (#{id,jdbcType=INTEGER}, #{nameIdentity,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateDate,jdbcType=TIMESTAMP})
+    insert into st_identity (id, name_identity, remarks, 
+      create_date, update_date, is_valid
+      )
+    values (#{id,jdbcType=INTEGER}, #{nameIdentity,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{isValid,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.Identity" >
     insert into st_identity
@@ -35,11 +39,17 @@
       <if test="nameIdentity != null" >
         name_identity,
       </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
       <if test="createDate != null" >
         create_date,
       </if>
       <if test="updateDate != null" >
         update_date,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -49,11 +59,17 @@
       <if test="nameIdentity != null" >
         #{nameIdentity,jdbcType=VARCHAR},
       </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -63,11 +79,17 @@
       <if test="nameIdentity != null" >
         name_identity = #{nameIdentity,jdbcType=VARCHAR},
       </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -75,22 +97,50 @@
   <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.Identity" >
     update st_identity
     set name_identity = #{nameIdentity,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_valid = #{isValid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <!--查询所有身份-->
+  <!--多条件查询数据列表-->
   <select id="selectByParams" parameterType="com.xxxx.cispc.query.IdentityQuery" resultType="com.xxxx.cispc.vo.Identity">
     select
-    <include refid="Base_Column_List"></include>
+        <include refid="Base_Column_List" />
     from
-    st_identity
+        st_identity
+    <where>
+        is_valid=1
+      <if test="nameIdentity!=null and nameIdentity!=''">
+        and name_identity like concat('%',#{nameIdentity},'%')
+      </if>
+      <if test="remarks!=null and remarks!=''">
+        and remarks like concat('%',#{remarks},'%')
+      </if>
+    </where>
   </select>
 
-  <select id="queryIdentityByName" resultType="com.xxxx.cispc.vo.Identity" parameterType="java.lang.String">
-    select <include refid="Base_Column_List"></include>
+  <!--通过角色名称查询角色信息-->
+  <select id="queryIdentityByName" parameterType="java.lang.String" resultType="com.xxxx.cispc.vo.Identity">
+    select <include refid="Base_Column_List" />
     from st_identity where name_identity=#{nameIdentity}
   </select>
+
+  <!--添加角色信息-->
+  <insert id="addIdentity" parameterType="com.xxxx.cispc.vo.Identity">
+    insert into st_identity (name_identity, remarks, create_date, update_date, is_valid)
+    values (#{nameIdentity},#{remarks},#{createDate},#{updateDate},#{isValid})
+  </insert>
+
+  <!--批量删除角色记录-->
+  <update id="deleteIdentity" parameterType="java.lang.Integer">
+    update st_identity set is_valid=0
+    where id in
+    <foreach collection="array" item="identityId" open="(" close=")" separator=",">
+      #{identityId}
+    </foreach>
+  </update>
+
 
 </mapper>

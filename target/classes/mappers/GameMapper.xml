@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.cispc.dao.GameMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.Game" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="g_id" property="gId" jdbcType="INTEGER" />
+    <result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    <result column="game_price" property="gamePrice" jdbcType="INTEGER" />
+    <result column="game_profile" property="gameProfile" jdbcType="VARCHAR" />
+    <result column="bond" property="bond" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="stater" property="stater" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, g_id, game_name, game_price, game_profile, bond, create_date, update_date, stater
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_game
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from st_game
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.cispc.vo.Game" >
+    insert into st_game (id, g_id, game_name, 
+      game_price, game_profile, bond, 
+      create_date, update_date, stater
+      )
+    values (#{id,jdbcType=INTEGER}, #{gId,jdbcType=INTEGER}, #{gameName,jdbcType=VARCHAR}, 
+      #{gamePrice,jdbcType=INTEGER}, #{gameProfile,jdbcType=VARCHAR}, #{bond,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{stater,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.Game" >
+    insert into st_game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gId != null" >
+        g_id,
+      </if>
+      <if test="gameName != null" >
+        game_name,
+      </if>
+      <if test="gamePrice != null" >
+        game_price,
+      </if>
+      <if test="gameProfile != null" >
+        game_profile,
+      </if>
+      <if test="bond != null" >
+        bond,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="stater != null" >
+        stater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gId != null" >
+        #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="gameName != null" >
+        #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="gamePrice != null" >
+        #{gamePrice,jdbcType=INTEGER},
+      </if>
+      <if test="gameProfile != null" >
+        #{gameProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="bond != null" >
+        #{bond,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stater != null" >
+        #{stater,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.Game" >
+    update st_game
+    <set >
+      <if test="gId != null" >
+        g_id = #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="gameName != null" >
+        game_name = #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="gamePrice != null" >
+        game_price = #{gamePrice,jdbcType=INTEGER},
+      </if>
+      <if test="gameProfile != null" >
+        game_profile = #{gameProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="bond != null" >
+        bond = #{bond,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stater != null" >
+        stater = #{stater,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.Game" >
+    update st_game
+    set g_id = #{gId,jdbcType=INTEGER},
+      game_name = #{gameName,jdbcType=VARCHAR},
+      game_price = #{gamePrice,jdbcType=INTEGER},
+      game_profile = #{gameProfile,jdbcType=VARCHAR},
+      bond = #{bond,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      stater = #{stater,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 多条件查询 -->
+  <select id="selectByParams" parameterType="com.xxxx.cispc.query.GameQuery" resultType="com.xxxx.cispc.vo.Game">
+    select
+      g.id, g_id, u.phone, true_name, game_name, game_price, game_profile, bond, g.create_date, g.update_date, stater
+    from st_user u
+    inner join st_game g
+    on g.g_id = u.id
+    <where>
+      <if test="gameName != null and gameName != ''">
+        and game_name like concat('%',#{gameName},'%')
+      </if>
+      <if test="gamePrice != null and gamePrice !=''">
+        and game_price = #{gamePrice}
+      </if>
+      <if test="gameProfile != null and gameProfile !=''">
+        and game_profile like concat('%',#{gameProfile},'%')
+      </if>
+    </where>
+  </select>
+  <!-- 删除多个 -->
+  <delete id="deleteBatch">
+    delete from st_game
+    where
+        id
+    in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+  </delete>
+
+  <!-- 查询我的 -->
+  <select id="queryMyGame" parameterType="com.xxxx.cispc.query.MyGameQuery" resultType="com.xxxx.cispc.vo.Game">
+    select
+      g.id, g_id, u.phone, true_name, game_name, game_price, game_profile, bond, g.create_date, g.update_date, stater
+    from st_user u
+    inner join st_game g
+    on g.g_id = u.id and u.id = #{userId}
+    <where>
+      <if test="gameName != null and gameName != ''">
+        and game_name like concat('%',#{gameName},'%')
+      </if>
+      <if test="stater != null">
+        and stater = #{stater}
+      </if>
+    </where>
+  </select>
+
+  <!-- 查询状态 -->
+  <select id="queryAllStater" parameterType="int" resultType="java.util.Map">
+    select
+      distinct stater
+    from st_user u
+    inner join st_game g
+    on g.g_id = u.id
+  </select>
+
+</mapper>

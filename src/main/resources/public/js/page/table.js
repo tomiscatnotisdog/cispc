@@ -25,7 +25,6 @@ layui.use(['form', 'table'], function () {
      * 监听头部根据栏
      */  //toolbar(表格的lay-filter属性值)
     table.on('toolbar(currentTableFilter)',function (data) {
-        console.log(data);
         if (data.event==="add"){
             //调用更新或添加营销机会的展示页面,传入营销机会id
             toAdd();

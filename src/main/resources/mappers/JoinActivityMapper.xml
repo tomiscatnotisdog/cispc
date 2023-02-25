@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.cispc.dao.JoinActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.JoinActivity" >
+    <id column="make_frend_id" property="makeFrendId" jdbcType="INTEGER" />
+    <result column="join_man" property="joinMan" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="join_date" property="joinDate" jdbcType="TIMESTAMP" />
+    <result column="create_man_phone" property="createManPhone" jdbcType="VARCHAR" />
+    <result column="create_man" property="createMan" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_join_activity
+    where make_frend_id = #{makeFrendId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from st_join_activity
+    where make_frend_id = #{makeFrendId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.cispc.vo.JoinActivity" >
+    insert into st_join_activity (make_frend_id, join_man, comment, 
+      activity_name, join_date, create_man_phone, 
+      create_man)
+    values (#{makeFrendId,jdbcType=INTEGER}, #{joinMan,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      #{activityName,jdbcType=VARCHAR}, #{joinDate,jdbcType=TIMESTAMP}, #{createManPhone,jdbcType=VARCHAR}, 
+      #{createMan,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.JoinActivity" >
+    insert into st_join_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="makeFrendId != null" >
+        make_frend_id,
+      </if>
+      <if test="joinMan != null" >
+        join_man,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="joinDate != null" >
+        join_date,
+      </if>
+      <if test="createManPhone != null" >
+        create_man_phone,
+      </if>
+      <if test="createMan != null" >
+        create_man,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="makeFrendId != null" >
+        #{makeFrendId,jdbcType=INTEGER},
+      </if>
+      <if test="joinMan != null" >
+        #{joinMan,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createManPhone != null" >
+        #{createManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createMan != null" >
+        #{createMan,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.JoinActivity" >
+    update st_join_activity
+    <set >
+      <if test="joinMan != null" >
+        join_man = #{joinMan,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        join_date = #{joinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createManPhone != null" >
+        create_man_phone = #{createManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createMan != null" >
+        create_man = #{createMan,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where make_frend_id = #{makeFrendId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.JoinActivity" >
+    update st_join_activity
+    set join_man = #{joinMan,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      activity_name = #{activityName,jdbcType=VARCHAR},
+      join_date = #{joinDate,jdbcType=TIMESTAMP},
+      create_man_phone = #{createManPhone,jdbcType=VARCHAR},
+      create_man = #{createMan,jdbcType=VARCHAR}
+    where make_frend_id = #{makeFrendId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByParams" parameterType="com.xxxx.cispc.query.JoinActivityQuery"
+          resultType="com.xxxx.cispc.model.MyjoinModel">
+    select
+        s.*,t.complate_date,t.place,t.type
+    from
+        st_join_activity s
+     left join
+        st_make_frend t
+    on s.make_frend_id = t.id
+    <where>
+      <if test="joinMan !=null and joinMan !=''">
+        and s.join_man like concat('%',#{joinMan},'%')
+      </if>
+      <if test="createMan !=null and createMan !=''">
+        and s.create_man like concat('%',#{createMan},'%')
+      </if>
+      <if test="activityName != null and activityName != ''">
+        and s.activity_name like concat('%',#{activityName},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByParamsmycreate" parameterType="com.xxxx.cispc.query.JoinActivityQuery"
+          resultType="com.xxxx.cispc.model.MyCreateModel">
+        select
+        id,activity_name,place,type,create_man,create_date,complate_date,is_complate
+        from
+        st_make_frend
+
+        <where>
+         create_man = #{createMan}
+          <if test="type !=null and type !=''">
+            and type like concat('%',#{type},'%')
+          </if>
+          <if test="activityName != null and activityName != ''">
+            and activity_name like concat('%',#{activityName},'%')
+          </if>
+        </where>
+  </select>
+
+  <update id="updateComment">
+    update
+        st_join_activity
+    set
+        comment = #{comment}
+    where
+        make_frend_id = #{id}
+        and join_man = #{joinMan}
+  </update>
+
+  <select id="selectByMakeFrendId"  resultType="com.xxxx.cispc.model.MyjoinModel">
+    select
+      s.*,t.complate_date,t.place,t.type
+    from
+      st_join_activity s
+        left join
+      st_make_frend t
+    on
+      s.make_frend_id = t.id
+    where
+        s.make_frend_id = #{id}
+        and s.join_man = #{joinMan}
+  </select>
+
+  <update id="deleteFrendById" parameterType="int">
+    update
+        st_make_frend
+    set
+        is_valid = 0,
+        is_complate = '已取消'
+
+    where id = #{id}
+  </update>
+
+  <select id="selectByParamsmyjoin" parameterType="com.xxxx.cispc.query.CommentQuery" resultType="com.xxxx.cispc.model.CommentModel">
+        select
+            make_frend_id id,join_man,comment
+         from
+            st_join_activity
+         where
+            make_frend_id = #{id}
+  </select>
+
+
+  <delete id="frendunjoin" >
+    delete from st_join_activity where make_frend_id = #{id} and join_man = #{joinMan}
+  </delete>
+
+  <select id="selectByJoinMan" resultType="com.xxxx.cispc.vo.JoinActivity">
+    select *
+    from st_join_activity
+    where make_frend_id=#{id} and join_man = #{joinMan}
+  </select>
+
+<!--  参加人数的校验 从st_join_activity 表中 得到多少人参加这个活动 -->
+  <select id="selectJoinedPeopleById" parameterType="int" resultType="java.lang.Integer">
+    select
+        count(make_frend_id)
+    from st_join_activity
+    where make_frend_id = #{id}
+  </select>
+</mapper>

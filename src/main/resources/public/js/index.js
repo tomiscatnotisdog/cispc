@@ -1,11 +1,11 @@
-layui.use(['form','jquery','jquery_cookie'], function () {
-    var form = layui.form,
+layui.use(['element', 'layer', 'layuimini','jquery','jquery_cookie','form','jquery'], function () {
+        var form = layui.form,
         layer = layui.layer,
         $ = layui.jquery,
         $ = layui.jquery_cookie($);
 
     /**
-     * 表单提交的监听
+     * 表单提交的监听(登陆按钮)
      *    form.on('submit(按钮的lay-filter属性值)', function(data){}
      */
     form.on('submit(login)', function(data){
@@ -18,11 +18,16 @@ layui.use(['form','jquery','jquery_cookie'], function () {
             type:"post",
             url: ctx +"/user/login",
             data:{
-                userName:data.field.username,
-                userPwd:data.field.password
+                //userName与后台一致，username与index.ftl一致
+                userNumber:data.field.usernumber,
+                password:data.field.pwd,
+                captcha:data.field.capt
             },
-            success:function(resultInfo){ //resultInfo是回调函数,用来接收后台返回的数据
+            dataType:"json",
+            success:function(resultInfo){ //resultInfo回是调函数,用来接收后台返回的数据
+
                 console.log(resultInfo);
+
                 //判断返回的信息,如果code是200则表示登陆成功,否则失败
                 if (200===resultInfo.code){
                     //登陆成功
@@ -34,21 +39,21 @@ layui.use(['form','jquery','jquery_cookie'], function () {
 
                         //判断用户是否选择记住我
                         if ($("#rememberMe").prop("checked")){
-                            //选择,设置cokkie对象7天生效
+                            //选择,设置cookie对象7天生效
                             //1.将用户信息存到cookie中
-                            $.cookie("userIdStr",resultInfo.result.userIdStr,{expires:7});
-                            $.cookie("userName",resultInfo.result.userName,{expires:7});
+                            $.cookie("userId",resultInfo.result.userId,{expires:7});
+                            $.cookie("userNumber",resultInfo.result.userNumber,{expires:7});
+                            $.cookie("password",resultInfo.result.password,{expires:7});
                             $.cookie("trueName",resultInfo.result.trueName,{expires:7});
                         }else {
                             //1.将用户信息存到cookie中
-                            $.cookie("userIdStr",resultInfo.result.userIdStr);
-                            $.cookie("userName",resultInfo.result.userName);
+                            $.cookie("userId",resultInfo.result.userId);
+                            $.cookie("userNumber",resultInfo.result.userNumber);
+                            $.cookie("password",resultInfo.result.password);
                             $.cookie("trueName",resultInfo.result.trueName);
                         }
-
-
                         //2.跳转到登陆页面
-                        window.location.href=ctx+"/main"
+                        window.location.href = ctx+"/main";
                     })
                 }else {
                     //登陆失败

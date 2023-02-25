@@ -5,21 +5,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class Table {
-    private Integer id;
+    private Integer id; //主键id
 
-    private String userName;
+    private String userName; //用户名称
 
-    private String sex;
+    private String sex; //用户性别
 
-    private String city;
+    private String city; //所在城市
 
-    private String phone;
+    private String phone; //联系方式
 
-    private String email;
+    private String email; //用户邮箱
 
-    private String identity;
+    private String identity; //用户身份
 
-    private String sign;
+    private String sign; //个性签名
 
     @JsonFormat(pattern = "yyyy-MM-dd hh-mm-ss ",timezone = "GMT-8")
     private Date createDate;

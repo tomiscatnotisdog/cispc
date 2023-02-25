@@ -2,6 +2,8 @@ package com.xxxx.cispc.base;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xxxx.cispc.model.CommentModel;
+import com.xxxx.cispc.model.MyCreateModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
@@ -68,6 +70,14 @@ public abstract class BaseService<T,ID> {
         return baseMapper.selectByParams(baseQuery);
     }
 
+    public List<T> selectByParamsforMyCreate(BaseQuery baseQuery) throws DataAccessException{
+        return baseMapper.selectByParamsmycreate(baseQuery);
+    }
+
+    public List<T> selectByParamsmyjoin(BaseQuery baseQuery) throws DataAccessException{
+        return baseMapper.selectByParamsmyjoin(baseQuery);
+    }
+
 
     /**
      * 更新单条记录
@@ -116,6 +126,28 @@ public abstract class BaseService<T,ID> {
         Map<String,Object> result = new HashMap<String,Object>();
         PageHelper.startPage(baseQuery.getPage(),baseQuery.getLimit());
         PageInfo<T> pageInfo =new PageInfo<T>(selectByParams(baseQuery));
+        result.put("count",pageInfo.getTotal());
+        result.put("data",pageInfo.getList());
+        result.put("code",0);
+        result.put("msg","");
+        return result;
+    }
+
+    public Map<String, Object> queryByParamsForTableMyCreate(BaseQuery baseQuery) {
+        Map<String,Object> result = new HashMap<String,Object>();
+        PageHelper.startPage(baseQuery.getPage(),baseQuery.getLimit());
+        PageInfo<MyCreateModel> pageInfo =new PageInfo<MyCreateModel>((List<MyCreateModel>) selectByParamsforMyCreate(baseQuery));
+        result.put("count",pageInfo.getTotal());
+        result.put("data",pageInfo.getList());
+        result.put("code",0);
+        result.put("msg","");
+        return result;
+    }
+
+    public Map<String, Object> queryByParamsForTableMyJoin(BaseQuery baseQuery) {
+        Map<String,Object> result = new HashMap<String,Object>();
+        PageHelper.startPage(baseQuery.getPage(),baseQuery.getLimit());
+        PageInfo<CommentModel> pageInfo =new PageInfo<CommentModel>((List<CommentModel>)selectByParamsmyjoin(baseQuery));
         result.put("count",pageInfo.getTotal());
         result.put("data",pageInfo.getList());
         result.put("code",0);

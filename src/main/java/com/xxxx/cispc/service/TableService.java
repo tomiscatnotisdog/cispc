@@ -87,7 +87,9 @@ public class TableService extends BaseService<Table,Integer> {
         //2.判断用户名是否重复-通过用户名查询对象
         Table tempTable=tableMapper.queryTableByName(table.getUserName());
         //判断判断查询到的对象是否是当前对象
-        AssertUtil.isTrue(!tempTable.getId().equals(table.getId()),"用户名称已存在!");
+        if (tempTable!=null){
+            AssertUtil.isTrue(!table.getId().equals(tempTable.getId()),"用户名称已存在!");
+        }
         //3.参数的设置校验
         settingParams(table);
 
@@ -105,7 +107,7 @@ public class TableService extends BaseService<Table,Integer> {
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteTable(Integer[] tableIds){
         //1.进行参数校验
-        AssertUtil.isTrue(tableIds==null,"请选择要删除的记录!");
+        AssertUtil.isTrue(tableIds==null||tableIds.length==0,"请选择要删除的记录!");
         //2.执行删除(判断受影响的行数是否与传入的id个数相得)
         AssertUtil.isTrue(tableMapper.deleteBatch(tableIds)!=tableIds.length,"记录删除失败!");
     }
@@ -157,9 +159,6 @@ public class TableService extends BaseService<Table,Integer> {
         //将身份对应的id存到table对象中
         table.setIdentity(identity.getId().toString());
         //将查询到的记录存放到请求域中
-
-        System.out.println(table);
-
         request.setAttribute("table",table);
         //返回视图名称
     }

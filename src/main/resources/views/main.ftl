@@ -22,7 +22,7 @@
                 <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
             </li>
             <li class="layui-nav-item layuimini-setting">
-                <a href="javascript:;">${(user.userName)!""}</a>
+                <a href="javascript:;">${(user.nickName)!""}</a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a href="javascript:;" data-iframe-tab="${ctx}/user/toSettingPage" data-title="基本资料"
@@ -35,6 +35,9 @@
                     <dd>
                         <a href="javascript:;" class="login-out">退出登录</a>
                     </dd>
+                    <dd>
+                        <a href="javascript:;" class="login-cancellation">注销账户</a>
+                    </dd>
                 </dl>
             </li>
             <li class="layui-nav-item layuimini-select-bgcolor mobile layui-hide-xs" lay-unselect>
@@ -42,153 +45,188 @@
             </li>
         </ul>
     </div>
-
+    <#-------------------------------------------------------功能------------------------------------------------------->
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll layui-left-menu">
             <#--判断当前登陆用户是否拥有权限-->
-            <#--<#if permissions??>-->
-            <ul class="layui-nav layui-nav-tree layui-left-nav-tree layui-this" id="currency">
-                <#--通过freemarker中的內建指令来判断菜单是否显示-->
-                <#--<#if permissions?seq_contains(10)>-->
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-street-view"></i><span
-                                class="layui-left-nav"> 营销管理</span> <span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child">
-                        <#--<#if permissions?seq_contains(1010)>-->
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-1"
-                               data-tab="sale_chance/index" target="_self"><i class="fa fa-tty"></i><span
-                                        class="layui-left-nav"> 营销机会管理</span></a>
-                        </dd>
-                        <#--</#if>
-                        <#if permissions?seq_contains(1020)>-->
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-2"
-                               data-tab="cus_dev_plan/index" target="_self"><i class="fa fa-ellipsis-h"></i><span
-                                        class="layui-left-nav"> 客户开发计划</span></a>
-                        </dd>
-                        <#--</#if>-->
-                    </dl>
-                </li>
-                <#--</#if>
-                <#if permissions?seq_contains(20)>-->
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-flag"></i><span
-                                class="layui-left-nav"> 客户管理</span> <span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3"
-                               data-tab="customer/index" target="_self"><i class="fa fa-exchange"></i><span
-                                        class="layui-left-nav"> 客户信息管理</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4"
-                               data-tab="customer_loss/index" target="_self"><i class="fa fa-user-times"></i><span
-                                        class="layui-left-nav"> 客户流失管理</span></a>
-                        </dd>
-                    </dl>
-                </li>
-                <#--</#if>
-                <#if permissions?seq_contains(30)>-->
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-desktop"></i><span
-                                class="layui-left-nav"> 服务管理</span> <span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-5"
-                               data-tab="customer_serve/index/1" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 服务创建</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-6"
-                               data-tab="customer_serve/index/2" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 服务分配</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-7"
-                               data-tab="customer_serve/index/3" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 服务处理</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-8"
-                               data-tab="customer_serve/index/4" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 服务反馈</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-9"
-                               data-tab="customer_serve/index/5" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 服务归档</span></a>
-                        </dd>
-                    </dl>
-                </li>
-                <#--</#if>
-                <#if permissions?seq_contains(40)>-->
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-home"></i><span
-                                class="layui-left-nav"> 统计报表</span> <span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
-                               data-tab="report/0" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 客户贡献分析</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
-                               data-tab="report/1" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 客户构成分析</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
-                               data-tab="sale_chance/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 客户服务分析</span></a>
-                        </dd>
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
-                               data-tab="report/3" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 客户流失分析</span></a>
-                        </dd>
-                    </dl>
-                </li>
-                <#--</#if>
-                <#if permissions?seq_contains(60)>-->
-                <li class="layui-nav-item">
-                    <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-gears"></i><span
-                                class="layui-left-nav">评价反馈</span> <span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child">
-                        <#--<#if permissions?seq_contains(6040)>-->
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
-                               data-tab="data_dic/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 字典管理</span></a>
-                        </dd>
-                        <#--</#if>
-                        <#if permissions?seq_contains(6010)>-->
-                        <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11"
-                               data-tab="user/index" target="_self"><i class="fa fa-user"></i><span
-                                        class="layui-left-nav"> 用户管理</span></a>
-                        </dd>
-                        <#--</#if>
-                        <#if permissions?seq_contains(6020)>-->
-                        <dd class="">
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-12"
-                               data-tab="role/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 角色管理</span></a>
-                        </dd>
-                        <#--</#if>
-                        <#if permissions?seq_contains(6050)>-->
-                        <dd class="">
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-13"
-                               data-tab="module/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 菜单管理</span></a>
-                        </dd>
-                        <#--</#if>-->
-                    </dl>
-                </li>
-                <#--</#if>-->
-                <span class="layui-nav-bar" style="top: 201px; height: 0px; opacity: 0;"></span>
-            </ul>
-            <#--</#if>-->
+            <#if codes??>
+                <ul class="layui-nav layui-nav-tree layui-left-nav-tree layui-this" id="currency">
+                    <#--通过freemarker中的內建指令来判断菜单是否显示-->
+                    <#if codes?seq_contains(1)>
+                    <#--综合管理-宦吉田-->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-home"
+                                                                              style="color: deepskyblue"></i><span
+                                        class="layui-left-nav" style="color: turquoise">综合管理</span> <span
+                                        class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <#if codes?seq_contains(11)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="table" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-table" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav">表格示例</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(12)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="identity/index" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-male" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav">身份管理</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(13)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="module/index" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-database" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav">资源管理</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(14)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="identityModule/index" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-users" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav">权限管理</span></a>
+                                    </dd>
+                                </#if>
+                            </dl>
+                        </li>
+                    </#if>
+                    <#-------------------------------------------------------张永永------------------------------------------------------->
+                    <#if codes?seq_contains(2)>
+                    <#--交友活动-张永永-->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-street-view"
+                                                                              style="color: deepskyblue"></i><span
+                                        class="layui-left-nav" style="color: turquoise"> 交友活动</span> <span
+                                        class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <#if codes?seq_contains(21)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-1"
+                                           data-tab="frend/index" target="_self"><i class="fa fa-tty"
+                                                                                    style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav" style="color: turquoise"> 全活动</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(22)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-2"
+                                           data-tab="join/index" target="_self"><i class="fa fa-ellipsis-h"
+                                                                                   style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav" style="color: turquoise"> 我参加的活动</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(23)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-2"
+                                           data-tab="join/myfrend" target="_self" style="color: deepskyblue"><i
+                                                    class="fa fa-ellipsis-h"></i><span
+                                                    class="layui-left-nav" style="color: turquoise"> 我发起的活动</span></a>
+                                    </dd>
+                                </#if>
+                            </dl>
+                        </li>
+                    </#if>
+                    <#-------------------------------------------------------刘宇------------------------------------------------------->
+                    <#if codes?seq_contains(3)>
+                    <#--游戏管理-刘宇-->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;" class="layui-menu-tips" style="color: deepskyblue"><i
+                                        class="fa fa-steam-square"></i><span
+                                        class="layui-left-nav" style="color: turquoise"> 游戏管理</span> <span
+                                        class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <#if codes?seq_contains(31)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-3"
+                                           data-tab="game/index" target="_self" style="color: deepskyblue"><i
+                                                    class="fa fa-puzzle-piece"></i><span
+                                                    class="layui-left-nav" style="color: turquoise"> 全部游戏</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(32)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-4"
+                                           data-tab="game/myGame" target="_self" style="color: deepskyblue"><i
+                                                    class="fa fa-user-times"></i><span
+                                                    class="layui-left-nav" style="color: turquoise"> 我的游戏 </span></a>
+                                    </dd>
+                                </#if>
+                            </dl>
+                        </li>
+                    </#if>
+                    <#-------------------------------------------------------欧廖------------------------------------------------------->
+                    <#if codes?seq_contains(4)>
+                    <#--班级管理-欧廖-->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-graduation-cap"
+                                                                              style="color: deepskyblue"></i><span
+                                        class="layui-left-nav" style="color: turquoise">校园管理</span> <span
+                                        class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <#if codes?seq_contains(41)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="student/index" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-tachometer" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav"> 班级管理</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(42)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="xuesheng/xueuser" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-tachometer" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav"> 假条管理</span></a>
+                                    </dd>
+                                </#if>
+                            </dl>
+                        </li>
+                    </#if>
+
+                    <#-------------------------------------------------------金锐------------------------------------------------------->
+                    <#if codes?seq_contains(6)>
+                    <#--评价反馈-金锐-->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-pencil-square-o"
+                                                                              style="color: deepskyblue"></i><span
+                                        class="layui-left-nav" style="color: turquoise">评价反馈</span> <span
+                                        class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <#if codes?seq_contains(61)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="feedback/index" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-tachometer" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav"> 用户反馈</span></a>
+                                    </dd>
+                                </#if>
+                            </dl>
+                        </li>
+                    </#if>
+
+
+                    <span class="layui-nav-bar" style="top: 201px; height: 0px; opacity: 0;"></span>
+                </ul>
+            </#if>
+
+
         </div>
     </div>
 
@@ -216,9 +254,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 <script type="text/javascript" src="${ctx}/js/main.js"></script>
 </body>
 </html>

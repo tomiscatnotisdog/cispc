@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.cispc.dao.IdentityModuleMapper">
+    <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.IdentityModule">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="identity_id" property="identityId" jdbcType="INTEGER"/>
+        <result column="module_id" property="moduleId" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, identity_id, code, create_date, update_date
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from st_identity_module
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from st_identity_module
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.xxxx.cispc.vo.IdentityModule">
+    insert into st_identity_module (id, identity_id, module_id, 
+      create_date, update_date)
+    values (#{id,jdbcType=INTEGER}, #{identityId,jdbcType=INTEGER}, #{moduleId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.IdentityModule">
+        insert into st_identity_module
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="identityId != null">
+                identity_id,
+            </if>
+            <if test="moduleId != null">
+                module_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="identityId != null">
+                #{identityId,jdbcType=INTEGER},
+            </if>
+            <if test="moduleId != null">
+                #{moduleId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.IdentityModule">
+        update st_identity_module
+        <set>
+            <if test="identityId != null">
+                identity_id = #{identityId,jdbcType=INTEGER},
+            </if>
+            <if test="moduleId != null">
+                module_id = #{moduleId,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.IdentityModule">
+    update st_identity_module
+    set identity_id = #{identityId,jdbcType=INTEGER},
+      module_id = #{moduleId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <!--多条件查询权限信息-->
+    <select id="queryIdentityByParams" parameterType="com.xxxx.cispc.query.IdentityModuleQuery"
+            resultType="com.xxxx.cispc.model.IdentityModuleModel">
+        select im.id,i.name_identity as identity_name,m.module_name,im.create_date,im.update_date
+        FROM st_identity_module im,st_identity i,st_module m
+        <where>
+            im.identity_id=i.id and im.code=m.code
+            <if test="identityName!=null and identityName!=''">
+                name_identity like concat('%','#{identityName}','%')
+            </if>
+        </where>
+    </select>
+
+    <!--根据角色名称查询角色记录-->
+    <select id="queryIdentityModuleByIdentityName" resultType="int" parameterType="java.lang.String">
+        select COUNT(1) FROM st_identity_module im,st_identity i,st_module m
+        <where>
+            im.identity_id=i.id and im.code=m.code
+            <if test="identityName!=null and identityName!=''">
+                and name_identity=#{identityName}
+            </if>
+        </where>
+    </select>
+
+    <!--根据角色id,删除权限记录-->
+    <delete id="deleteIdentityModuleByIdentityId" parameterType="java.lang.String">
+        delete from st_identity_module where identity_id=#{identityId}
+  </delete>
+
+    <!--进行角色授权-->
+    <insert id="warrant">
+    insert into st_identity_module (identity_id,code,create_date,update_date) values (#{identityId},#{code},now(),now())
+  </insert>
+
+    <!--通过用户身份查询对应的资源码-->
+    <select id="queryCodeByIdentityName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select im.code FROM st_identity_module im,st_identity i WHERE im.identity_id=i.id AND name_identity=#{identity}
+  </select>
+</mapper>

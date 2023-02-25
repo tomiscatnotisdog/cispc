@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.cispc.dao.MakeFrendMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.MakeFrend">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_man" jdbcType="VARCHAR" property="createMan" />
+    <result column="max_numbers" jdbcType="INTEGER" property="maxNumbers" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="is_complate" jdbcType="VARCHAR" property="isComplate" />
+    <result column="complate_date" jdbcType="TIMESTAMP" property="complateDate" />
+    <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+    <result column="is_valid" jdbcType="INTEGER" property="isValid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_man, max_numbers, place, type, create_date, is_complate, complate_date, 
+    activity_name, is_valid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    *
+    from st_make_frend
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from st_make_frend
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.cispc.vo.MakeFrend">
+    insert into st_make_frend (id, create_man, max_numbers, 
+      place, type, create_date, 
+      is_complate, complate_date, activity_name, 
+      is_valid)
+    values (#{id,jdbcType=INTEGER}, #{createMan,jdbcType=VARCHAR}, #{maxNumbers,jdbcType=INTEGER}, 
+      #{place,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{isComplate,jdbcType=VARCHAR}, #{complateDate,jdbcType=TIMESTAMP}, #{activityName,jdbcType=VARCHAR}, 
+      #{isValid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.MakeFrend">
+    insert into st_make_frend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createMan != null">
+        create_man,
+      </if>
+      <if test="maxNumbers != null">
+        max_numbers,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="isComplate != null">
+        is_complate,
+      </if>
+      <if test="complateDate != null">
+        complate_date,
+      </if>
+      <if test="activityName != null">
+        activity_name,
+      </if>
+      <if test="isValid != null">
+        is_valid,
+      </if>
+      <if test="createManPhone != null">
+        create_man_phone
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createMan != null">
+        #{createMan,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNumbers != null">
+        #{maxNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isComplate != null">
+        #{isComplate,jdbcType=VARCHAR},
+      </if>
+      <if test="complateDate != null">
+        #{complateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityName != null">
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="createManPhone != null">
+        #{createManPhone,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.MakeFrend">
+    update st_make_frend
+    <set>
+      <if test="createMan != null">
+        create_man = #{createMan,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNumbers != null">
+        max_numbers = #{maxNumbers,jdbcType=INTEGER},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isComplate != null">
+        is_complate = #{isComplate,jdbcType=VARCHAR},
+      </if>
+      <if test="complateDate != null">
+        complate_date = #{complateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityName != null">
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null">
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.MakeFrend">
+    update st_make_frend
+    set create_man = #{createMan,jdbcType=VARCHAR},
+      max_numbers = #{maxNumbers,jdbcType=INTEGER},
+      place = #{place,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      is_complate = #{isComplate,jdbcType=VARCHAR},
+      complate_date = #{complateDate,jdbcType=TIMESTAMP},
+      activity_name = #{activityName,jdbcType=VARCHAR},
+      is_valid = #{isValid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByParams" parameterType="com.xxxx.cispc.query.MakeFrendQuery"
+          resultType="com.xxxx.cispc.vo.MakeFrend">
+
+    select
+        id, create_man, max_numbers, place, type, create_date, is_complate, complate_date,
+    activity_name,create_man_phone
+    from
+        st_make_frend
+    <where>
+        is_valid=1
+      <if test="maxNumbers != null and maxNumbers > 0 ">
+        and max_numbers &lt;= #{maxNumbers}
+      </if>
+      <if test="createMan !=null and createMan !=''">
+        and create_man like concat('%',#{createMan},'%')
+      </if>
+      <if test="activityName != null and activityName != ''">
+        and activity_name like concat('%',#{activityName},'%')
+      </if>
+    </where>
+
+  </select>
+
+ <select id="selectByMakeFrend" parameterType="String" resultType="com.xxxx.cispc.vo.MakeFrend">
+    select
+    id, create_man, max_numbers, place, type, create_date, is_complate, complate_date,
+    activity_name
+    from
+       st_make_frend
+    where
+        is_valid = 1
+    and
+         activity_name = #{activity_name}
+
+ </select>
+
+  <update id="deleteFrendById" parameterType="int">
+    update
+        st_make_frend
+    set
+        is_valid = 0,
+        is_complate = '已取消'
+
+    where id = #{id}
+  </update>
+
+</mapper>

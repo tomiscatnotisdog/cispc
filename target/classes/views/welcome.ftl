@@ -169,7 +169,7 @@
                                                         <h5>用户统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">1234</h1>
+                                                        <h1 class="no-margins">2178</h1>
                                                         <small>当前分类总记录数</small>
                                                     </div>
                                                 </div>
@@ -183,7 +183,7 @@
                                                         <h5>商品统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">1234</h1>
+                                                        <h1 class="no-margins">1264</h1>
                                                         <small>当前分类总记录数</small>
                                                     </div>
                                                 </div>
@@ -197,7 +197,7 @@
                                                         <h5>浏览统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">1234</h1>
+                                                        <h1 class="no-margins">4324</h1>
                                                         <small>当前分类总记录数</small>
                                                     </div>
                                                 </div>
@@ -211,7 +211,7 @@
                                                         <h5>订单统计</h5>
                                                     </div>
                                                     <div class="panel-content">
-                                                        <h1 class="no-margins">1234</h1>
+                                                        <h1 class="no-margins">4232</h1>
                                                         <small>当前分类总记录数</small>
                                                     </div>
                                                 </div>
@@ -450,13 +450,11 @@
                 <div class="layui-card">
                     <div class="layui-card-header"><i class="fa fa-paper-plane-o icon"></i>作者心语</div>
                     <div class="layui-card-body layui-text layadmin-text">
-                        <p>本模板基于layui2.5.4以及font-awesome-4.7.0进行实现。layui开发文档地址：<a
-                                    class="layui-btn layui-btn-xs layui-btn-danger" target="_blank"
-                                    href="http://www.layui.com/doc">layui文档</a></p>
-                        <p>技术交流QQ群（561838086）：<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=5JRGVfe"><img
-                                        border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="layuimini"
-                                        title="layuimini"></a>（加群请备注来源：如gitee、github、官网等）</p>
-                        <p>喜欢此后台模板的可以给我的GitHub和Gitee加个Star支持一下</p>
+                        <p>本模板基于layui2.5.4以及font-awesome-4.7.0进行实现。</p>
+                        <p>技术交流QQ：2026058477</p>
+                        <p>（加群请备注来意：如交流、学习、探讨等）</p>
+                        <p>喜欢此后台模板的可以给我的GitHub支持一下</p>
+                        <p>祝大家在兔年兔气顿生年属兔,春风常驻户迎春!一帆风顺年年好,万事如意步步高!旧岁又添几个喜,新年更上一层楼!</p>
                     </div>
                 </div>
 

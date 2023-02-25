@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.cispc.dao.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.Module" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="module_name" property="moduleName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="originator" property="originator" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, module_name, parent_id, url, originator, create_date, update_date, is_valid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_module
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from st_module
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.cispc.vo.Module" >
+    insert into st_module (id, code, module_name, 
+      parent_id, url, originator, 
+      create_date, update_date, is_valid
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{moduleName,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{originator,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{isValid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.Module" >
+    insert into st_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="moduleName != null" >
+        module_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="originator != null" >
+        originator,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null" >
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="originator != null" >
+        #{originator,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.Module" >
+    update st_module
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null" >
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="originator != null" >
+        originator = #{originator,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.Module" >
+    update st_module
+    set code = #{code,jdbcType=VARCHAR},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      originator = #{originator,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      is_valid = #{isValid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--多条件查询资源列表-->
+  <select id="selectByParams" parameterType="com.xxxx.cispc.query.ModuleQuery" resultType="com.xxxx.cispc.vo.Module">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    st_module
+    <where>
+        is_valid=1
+      <if test="moduleName!=null and moduleName!=''">
+        and module_name like concat('%',#{moduleName},'%')
+      </if>
+      <if test="originator!=null and originator!=''">
+        and originator like concat('%',#{originator},'%')
+      </if>
+    </where>
+  </select>
+
+  <!--查询所有的一级资源(父id为0,且不是main)-->
+  <select id="queryModuleIsOne" resultType="com.xxxx.cispc.vo.Module">
+    select * FROM st_module where parent_id=0 and code !=0
+  </select>
+
+  <!--根据资源名称查询资源对象-->
+  <select id="queryModuleByName" parameterType="java.lang.String" resultType="com.xxxx.cispc.vo.Module">
+    select <include refid="Base_Column_List"/>
+    from st_module where module_name=#{moduleName}
+  </select>
+
+  <!--批量移除资源-->
+  <update id="deleteModule" parameterType="java.lang.Integer">
+    update st_module set is_valid=0
+    where id in
+    <foreach collection="array" item="moduleId" open="(" close=")" separator=",">
+      #{moduleId}
+    </foreach>
+  </update>
+
+  <!--通过所属资源查询资源记录(当前后台写死为0,'main')-->
+  <select id="queryModulebyParentId" resultType="com.xxxx.cispc.vo.Module">
+    select <include refid="Base_Column_List"/>
+    from st_module where parent_id=0
+  </select>
+
+  <!--通过资源码查询资源对象-->
+  <select id="queryModuleByCode" resultType="com.xxxx.cispc.vo.Module" parameterType="java.lang.String">
+    select <include refid="Base_Column_List"/>
+    from st_module where code=#{code}
+  </select>
+
+  <!--通过指定父id查询对应的资源码集合-->
+  <select id="queryCodebyparentId" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select code from st_module where parent_id=#{c}
+  </select>
+
+</mapper>
