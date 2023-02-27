@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.cispc.dao.CreateOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.CreateOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_man" property="createMan" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_man_phone" property="createManPhone" jdbcType="VARCHAR" />
+    <result column="create_man_location" property="createManLocation" jdbcType="VARCHAR" />
+    <result column="is_complete" property="isComplete" jdbcType="INTEGER" />
+    <result column="complete_date" property="completeDate" jdbcType="TIMESTAMP" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+    <result column="st_user_number" property="stUserNumber" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+    <result column="receive_man" property="receiveMan" jdbcType="VARCHAR" />
+    <result column="receive_man_phone" property="receiveManPhone" jdbcType="VARCHAR" />
+    <result column="receive_date" property="receiveDate" jdbcType="TIMESTAMP" />
+    <result column="st_receive_user_number" property="stReceiveUserNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_man, create_date, create_man_phone, create_man_location, is_complete, 
+    complete_date, context, st_user_number, is_valid, receive_man, receive_man_phone, 
+    receive_date, st_receive_user_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from st_create_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from st_create_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.cispc.vo.CreateOrder" >
+    insert into st_create_order (id, create_man, create_date, 
+      create_man_phone, create_man_location, is_complete, 
+      complete_date, context, st_user_number, 
+      is_valid, receive_man, receive_man_phone, 
+      receive_date, st_receive_user_number)
+    values (#{id,jdbcType=INTEGER}, #{createMan,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createManPhone,jdbcType=VARCHAR}, #{createManLocation,jdbcType=VARCHAR}, #{isComplete,jdbcType=INTEGER}, 
+      #{completeDate,jdbcType=TIMESTAMP}, #{context,jdbcType=VARCHAR}, #{stUserNumber,jdbcType=INTEGER}, 
+      #{isValid,jdbcType=INTEGER}, #{receiveMan,jdbcType=VARCHAR}, #{receiveManPhone,jdbcType=VARCHAR}, 
+      #{receiveDate,jdbcType=TIMESTAMP}, #{stReceiveUserNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.CreateOrder" >
+    insert into st_create_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createMan != null" >
+        create_man,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createManPhone != null" >
+        create_man_phone,
+      </if>
+      <if test="createManLocation != null" >
+        create_man_location,
+      </if>
+      <if test="isComplete != null" >
+        is_complete,
+      </if>
+      <if test="completeDate != null" >
+        complete_date,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="stUserNumber != null" >
+        st_user_number,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="receiveMan != null" >
+        receive_man,
+      </if>
+      <if test="receiveManPhone != null" >
+        receive_man_phone,
+      </if>
+      <if test="receiveDate != null" >
+        receive_date,
+      </if>
+      <if test="stReceiveUserNumber != null" >
+        st_receive_user_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createMan != null" >
+        #{createMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createManPhone != null" >
+        #{createManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createManLocation != null" >
+        #{createManLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isComplete != null" >
+        #{isComplete,jdbcType=INTEGER},
+      </if>
+      <if test="completeDate != null" >
+        #{completeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="stUserNumber != null" >
+        #{stUserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="receiveMan != null" >
+        #{receiveMan,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveManPhone != null" >
+        #{receiveManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDate != null" >
+        #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stReceiveUserNumber != null" >
+        #{stReceiveUserNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.CreateOrder" >
+    update st_create_order
+    <set >
+      <if test="createMan != null" >
+        create_man = #{createMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createManPhone != null" >
+        create_man_phone = #{createManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="createManLocation != null" >
+        create_man_location = #{createManLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isComplete != null" >
+        is_complete = #{isComplete,jdbcType=INTEGER},
+      </if>
+      <if test="completeDate != null" >
+        complete_date = #{completeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="stUserNumber != null" >
+        st_user_number = #{stUserNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="receiveMan != null" >
+        receive_man = #{receiveMan,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveManPhone != null" >
+        receive_man_phone = #{receiveManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDate != null" >
+        receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stReceiveUserNumber != null" >
+        st_receive_user_number = #{stReceiveUserNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.CreateOrder" >
+    update st_create_order
+    set create_man = #{createMan,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_man_phone = #{createManPhone,jdbcType=VARCHAR},
+      create_man_location = #{createManLocation,jdbcType=VARCHAR},
+      is_complete = #{isComplete,jdbcType=INTEGER},
+      complete_date = #{completeDate,jdbcType=TIMESTAMP},
+      context = #{context,jdbcType=VARCHAR},
+      st_user_number = #{stUserNumber,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=INTEGER},
+      receive_man = #{receiveMan,jdbcType=VARCHAR},
+      receive_man_phone = #{receiveManPhone,jdbcType=VARCHAR},
+      receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+      st_receive_user_number = #{stReceiveUserNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  多条件查询所有发起的服务请求-->
+  <select id="selectByParams" parameterType="com.xxxx.cispc.query.RunningQuery"
+          resultType="com.xxxx.cispc.vo.CreateOrder">
+    select
+    cror.id, create_man, cror.create_date, create_man_phone, create_man_location, is_complete,
+    complete_date, context, st_user_number, cror.is_valid,receive_man, receive_man_phone,
+    receive_date
+    from
+    st_create_order cror
+    left join
+    st_user stu
+    on
+    cror.is_valid = stu.is_valid
+    <where>
+      st_user_number = user_number and is_complete = 1
+      <!--发起人姓名查询-->
+      <if test="null != createMan and createMan != ''">
+        and create_man like concat('%',#{createMan},'%')
+      </if>
+      <!--目的地查询-->
+      <if test="null != createManLocation and createManLocation != ''">
+        and create_man_location like concat('%',#{createManLocation},'%')
+      </if>
+      <!--手机号查询-->
+      <if test="null != createManPhone and createManPhone != ''">
+        and create_man_phone like concat('%',#{createManPhone},'%')
+      </if>
+      <!--学工号查询-->
+      <if test="null != stUserNumber and stUserNumber !=''">
+        and st_user_number like concat('%',#{stUserNumber},'%')
+      </if>
+      <!--订单状态查询-->
+      <if test="null != isComplete and isComplete !=''">
+        and is_complete like concat('%',#{isComplete},'%')
+      </if>
+    </where>
+  </select>
+
+  <!--  查询我接收的服务请求-->
+  <select id="selectMyCreate" parameterType="com.xxxx.cispc.query.RunningQuery"
+          resultType="com.xxxx.cispc.vo.CreateOrder">
+    select
+    cror.id, create_man, cror.create_date, create_man_phone, create_man_location, is_complete,
+    complete_date, context, st_user_number, cror.is_valid
+    from
+    st_user stu
+    inner join
+    st_create_order cror
+    on
+    cror.is_valid = stu.is_valid
+    <where>
+      cror.is_valid = stu.is_valid and true_name = #{trueName} and receive_man = #{trueName}  and (is_complete = 0 or is_complete = 2 or is_complete = 3)
+      <!--发起人姓名查询-->
+      <if test="null != createMan and createMan != ''">
+        and create_man like concat('%',#{createMan},'%')
+      </if>
+      <!--目的地查询-->
+      <if test="null != createManLocation and createManLocation != ''">
+        and create_man_location like concat('%',#{createManLocation},'%')
+      </if>
+<!--      &lt;!&ndash;学工号查询&ndash;&gt;-->
+<!--      <if test="null != stUserNumber and stUserNumber !=''">-->
+<!--        and st_user_number like concat('%',#{stUserNumber},'%')-->
+<!--      </if>-->
+      <!--订单状态查询-->
+      <if test="null != isComplete and isComplete !=''">
+        and is_complete like concat('%',#{isComplete},'%')
+      </if>
+    </where>
+  </select>
+
+
+
+<!--  </update>-->
+  <!--  多条件查询我发起的跑腿订单-->
+  <select id="selectMyReceive" parameterType="com.xxxx.cispc.query.MyReceiveQuery"
+          resultType="com.xxxx.cispc.vo.CreateOrder">
+    select
+    cror.id,  create_man_location, is_complete,
+    complete_date, context, cror.is_valid,receive_man, receive_man_phone,
+    receive_date
+    from
+    st_user stu
+    inner join
+    st_create_order cror
+    on
+    cror.is_valid = stu.is_valid and create_man =  #{trueName} and true_name = #{trueName}
+    <where>
+
+      <!--接单人姓名查询-->
+      <if test="null != receiveMan and receiveMan != ''">
+        and receive_man like concat('%',#{receiveMan},'%')
+      </if>
+      <!--目的地查询-->
+      <if test="null != createManLocation and createManLocation != ''">
+        and create_man_location like concat('%',#{createManLocation},'%')
+      </if>
+      <!--手机号查询-->
+      <if test="null != receiveManPhone and receiveManPhone != ''">
+        and receive_man_phone like concat('%',#{receiveManPhone},'%')
+      </if>
+      <!--学工号查询-->
+<!--      <if test="null != stUserNumber and stUserNumber !=''">-->
+<!--        and st_user_number like concat('%',#{stUserNumber},'%')-->
+<!--      </if>-->
+      <!--订单状态查询-->
+      <if test="null != isComplete and isComplete !=''">
+        and is_complete like concat('%',#{isComplete},'%')
+      </if>
+    </where>
+  </select>
+
+  <!-- 完成订单 -->
+  <update id="completeOrder" >
+    update
+    st_create_order
+    set
+    is_complete = 3
+    where
+    id
+    in
+    <foreach collection="array" separator="," open="(" close=")" item="id">
+      #{id}
+    </foreach>
+
+
+  </update>
+
+<!--查询接收人信息-->
+  <select id="selectReceiveManByUserNumber" parameterType="int" resultType="com.xxxx.cispc.model.CreateModel">
+    select
+        true_name  receiveMan ,phone  receiveManPhone ,user_number  userNumber
+    from
+        st_user
+    where
+        user_number = #{userNumber}
+  </select>
+
+</mapper>

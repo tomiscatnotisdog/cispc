@@ -199,6 +199,46 @@
                         </li>
                     </#if>
 
+
+                    <#-------------------------------------------------------吴云生------------------------------------------------------->
+                    <#if codes?seq_contains(5)>
+                    <#--班级管理-欧廖-->
+                        <li class="layui-nav-item">
+                            <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-truck"
+                                                                              style="color: deepskyblue"></i><span
+                                        class="layui-left-nav" style="color: turquoise">跑腿服务</span> <span
+                                        class="layui-nav-more"></span></a>
+                            <dl class="layui-nav-child">
+                                <#if codes?seq_contains(51)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="create_order/index" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-tachometer" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav"> 所有订单</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(52)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="create_order/receive" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-tachometer" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav"> 我发起的</span></a>
+                                    </dd>
+                                </#if>
+                                <#if codes?seq_contains(53)>
+                                    <dd>
+                                        <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd"
+                                           data-tab-mpi="m-p-i-10"
+                                           data-tab="create_order/myCreateOrder" target="_self" style="color: turquoise"><i
+                                                    class="fa fa-tachometer" style="color: deepskyblue"></i><span
+                                                    class="layui-left-nav"> 我接收的</span></a>
+                                    </dd>
+                                </#if>
+                            </dl>
+                        </li>
+                    </#if>
                     <#-------------------------------------------------------金锐------------------------------------------------------->
                     <#if codes?seq_contains(6)>
                     <#--评价反馈-金锐-->

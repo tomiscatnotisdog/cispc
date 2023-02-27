@@ -90,6 +90,21 @@ public interface BaseMapper<T,ID> {
      */
     List<T> queryMyGame(BaseQuery baseQuery) throws DataAccessException;
 
+    /**
+     * 多条件查询我发起的订单
+     *
+     * @param baseQuery
+     * @return
+     */
+    public List<T> selectMyCreate(BaseQuery baseQuery) throws DataAccessException;
+
+    /**
+     * 多条件查询我发起的订单
+     *
+     * @param baseQuery
+     * @return
+     */
+    public List<T> selectMyReceive(BaseQuery baseQuery) throws DataAccessException;
 
 
 }

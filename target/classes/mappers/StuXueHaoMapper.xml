@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.cispc.dao.StuXueHaoMapper">
+  <resultMap id="BaseResultMap" type="com.xxxx.cispc.vo.StuXueHao">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="studentname" jdbcType="VARCHAR" property="studentname" />
+    <result column="student" jdbcType="VARCHAR" property="student" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="specialized" jdbcType="VARCHAR" property="specialized" />
+    <result column="clasnam" jdbcType="VARCHAR" property="clasnam" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="approver" jdbcType="VARCHAR" property="approver" />
+    <result column="refuse" jdbcType="VARCHAR" property="refuse" />
+    <result column="devresult" jdbcType="VARCHAR" property="devresult" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, studentname, student, department, specialized, clasnam, reason, approver, refuse, 
+    devresult
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_stu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_stu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.cispc.vo.StuXueHao">
+    insert into t_stu (id, studentname, student, 
+      department, specialized, clasnam, 
+      reason, approver, refuse, 
+      devresult)
+    values (#{id,jdbcType=INTEGER}, #{studentname,jdbcType=VARCHAR}, #{student,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{specialized,jdbcType=VARCHAR}, #{clasnam,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{approver,jdbcType=VARCHAR}, #{refuse,jdbcType=VARCHAR}, 
+      #{devresult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.cispc.vo.StuXueHao">
+    insert into t_stu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="studentname != null">
+        studentname,
+      </if>
+      <if test="student != null">
+        student,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="specialized != null">
+        specialized,
+      </if>
+      <if test="clasnam != null">
+        clasnam,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="approver != null">
+        approver,
+      </if>
+      <if test="refuse != null">
+        refuse,
+      </if>
+      <if test="devresult != null">
+        devresult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null">
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="student != null">
+        #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="specialized != null">
+        #{specialized,jdbcType=VARCHAR},
+      </if>
+      <if test="clasnam != null">
+        #{clasnam,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approver != null">
+        #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="refuse != null">
+        #{refuse,jdbcType=VARCHAR},
+      </if>
+      <if test="devresult != null">
+        #{devresult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.cispc.vo.StuXueHao">
+    update t_stu
+    <set>
+      <if test="studentname != null">
+        studentname = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="student != null">
+        student = #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="specialized != null">
+        specialized = #{specialized,jdbcType=VARCHAR},
+      </if>
+      <if test="clasnam != null">
+        clasnam = #{clasnam,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="approver != null">
+        approver = #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="refuse != null">
+        refuse = #{refuse,jdbcType=VARCHAR},
+      </if>
+      <if test="devresult != null">
+        devresult = #{devresult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.cispc.vo.StuXueHao">
+    update t_stu
+    set studentname = #{studentname,jdbcType=VARCHAR},
+      student = #{student,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      specialized = #{specialized,jdbcType=VARCHAR},
+      clasnam = #{clasnam,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      approver = #{approver,jdbcType=VARCHAR},
+      refuse = #{refuse,jdbcType=VARCHAR},
+      devresult = #{devresult,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <select id="selectByParams" parameterType="com.xxxx.cispc.query.StuIdnameQuery" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from t_stu
+    <where>
+
+      <if test="null !=student and student !=''">
+        and student like concat('%',#{student},'%')
+      </if>
+
+      <if test="null !=studentname and studentname !=''">
+        and studentname =#{studentname}
+      </if>
+
+      <if test="null !=devresult and devresult !=''">
+        and devresult =#{devresult}
+      </if>
+
+    </where>
+  </select>
+
+
+  <delete id="deleteBatch" parameterType="java.lang.Integer">
+    delete from t_stu
+    where id IN
+    <foreach collection="array" item="outputId" open="(" separator="," close=")">
+      #{outputId}
+    </foreach>
+  </delete>
+
+  <select id="queryRoleByRoleName" parameterType="string" resultType="java.lang.Integer">
+    select count(1)
+    from t_stu  where  studentname=#{studentname}
+  </select>
+
+  <select id="queryRoleByXuehao" parameterType="string" resultType="java.lang.Integer">
+    select count(1)
+    from t_stu  where  student=#{student}
+  </select>
+
+
+
+
+
+
+</mapper>

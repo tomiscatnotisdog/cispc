@@ -155,4 +155,27 @@ public abstract class BaseService<T,ID> {
         return result;
     }
 
+    /**
+     * 多条件查询
+     * @param baseQuery
+     * @return
+     */
+    public List<T> selectMyCreate(BaseQuery baseQuery) throws DataAccessException{
+        return baseMapper.selectByParams(baseQuery);
+    }
+    /**
+     * 分页查询
+     * @param baseQuery
+     * @return
+     */
+    public Map<String, Object> queryByParamsForTable1(BaseQuery baseQuery) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        PageHelper.startPage(baseQuery.getPage(), baseQuery.getLimit());
+        PageInfo<T> pageInfo = new PageInfo<T>(selectMyCreate(baseQuery));
+        result.put("count", pageInfo.getTotal());
+        result.put("data", pageInfo.getList());
+        result.put("code", 0);
+        result.put("msg", "");
+        return result;
+    }
 }

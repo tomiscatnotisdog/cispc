@@ -319,7 +319,7 @@
                     <div class="layui-card-body layui-text">
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">修改选项卡样式</div>
-                            <div class="layuimini-notice-extra">2019-07-11 23:06</div>
+                            <div class="layuimini-notice-extra">2023-2-20 23:06</div>
                             <div class="layuimini-notice-content layui-hide">
                                 界面足够简洁清爽。<br>
                                 一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
@@ -333,7 +333,7 @@
                         </div>
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">新增系统404模板</div>
-                            <div class="layuimini-notice-extra">2019-07-11 12:57</div>
+                            <div class="layuimini-notice-extra">2023-2-21 12:57</div>
                             <div class="layuimini-notice-content layui-hide">
                                 界面足够简洁清爽。<br>
                                 一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
@@ -347,7 +347,7 @@
                         </div>
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">新增treetable插件和菜单管理样式</div>
-                            <div class="layuimini-notice-extra">2019-07-05 14:28</div>
+                            <div class="layuimini-notice-extra">2023-2-22 14:28</div>
                             <div class="layuimini-notice-content layui-hide">
                                 界面足够简洁清爽。<br>
                                 一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
@@ -361,7 +361,7 @@
                         </div>
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">修改logo缩放问题</div>
-                            <div class="layuimini-notice-extra">2019-07-04 11:02</div>
+                            <div class="layuimini-notice-extra">2023-2-22 11:02</div>
                             <div class="layuimini-notice-content layui-hide">
                                 界面足够简洁清爽。<br>
                                 一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
@@ -375,7 +375,7 @@
                         </div>
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">修复左侧菜单缩放tab无法移动</div>
-                            <div class="layuimini-notice-extra">2019-06-17 11:55</div>
+                            <div class="layuimini-notice-extra">2023-2-24 11:55</div>
                             <div class="layuimini-notice-content layui-hide">
                                 界面足够简洁清爽。<br>
                                 一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
@@ -389,7 +389,7 @@
                         </div>
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">修复多模块菜单栏展开有问题</div>
-                            <div class="layuimini-notice-extra">2019-06-13 14:53</div>
+                            <div class="layuimini-notice-extra">2023-2-25 14:53</div>
                             <div class="layuimini-notice-content layui-hide">
                                 界面足够简洁清爽。<br>
                                 一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>

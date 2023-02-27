@@ -74,10 +74,6 @@ public class IdentityMoudleService extends BaseService<IdentityModule,Integer> {
         //2.通过角色名称,查看已拥有的权限记录
         int count=identityModuleMapper.queryIdentityModuleByIdentityName(identityName);
         //3.判断是否存在权限,如果存在,将其全部移除
-
-        System.out.println(identityName);
-        System.out.println(identityId);
-
         if (count!=0){
             //通过角色id删除对应的权限记录
             AssertUtil.isTrue(identityModuleMapper.deleteIdentityModuleByIdentityId(Integer.toString(identityId))<count,"角色授权失败,请重试!");

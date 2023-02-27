@@ -105,7 +105,5 @@ public class IdentityService extends BaseService<Identity,Integer> {
         AssertUtil.isTrue(identityIds==null||identityIds.length==0,"请选择要删除的记录!");
         //2.执行删除(判断受影响的行数是否与传入的id个数相得)
         AssertUtil.isTrue(identityMapper.deleteIdentity(identityIds)!=identityIds.length,"记录删除失败!");
-
-
     }
 }
